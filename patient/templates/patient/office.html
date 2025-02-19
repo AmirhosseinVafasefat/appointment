@@ -1,0 +1,33 @@
+{% extends 'patient/layout.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/doctor.css' %}">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="display-flex">
+            {% for day in days %}
+            <div class="day-box">
+                <div class="date">
+                    <p>{{ day|to_jalali:'%A - %y/%m/%d' }}</p>
+                </div>
+                {% for appointment in appointments %}
+                {% if appointment.date == day %}
+                <form action="{% url 'patient:book_appointment' appointment_id=appointment.id %}" method="post">
+                    {% csrf_token %}
+                    <p>{{appointment.time}}</p>
+                    {% if appointment.is_available %}
+                    <input class="form-button" type="submit" value="رزرو">
+                    {% endif %}
+                </form>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'doctor/layout.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/doctor.css' %}">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="panel">
+        {% if message %}
+        <div>{{message}}</div>
+        {% endif %}
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="form-button" value="ایجاد نوبت">
+        </form>
+        {{ form.media }}
+    </div>
+</div>
+{% endblock %}

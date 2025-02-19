@@ -1,0 +1,75 @@
+
+.header {
+    border-bottom: solid 0.1rem lightgrey;
+}
+
+.header-content {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.box {
+    border: solid 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    height: 20rem;
+    margin: 0.5rem 0.25rem;
+    border-radius: 2rem;
+}
+
+@keyframes blue-button {
+    0%  {
+        background-color: rgb(45, 58, 233);
+        color: white;
+    }
+    100% {
+        border-color: rgb(45, 58, 233);
+        background-color: rgb(40, 50, 192);
+        color: white;
+    }
+}
+
+.blue {
+    background-color: rgb(45, 58, 233);
+    color: white;
+}
+
+
+.blue:hover {
+    animation: blue-button 0.5s forwards;
+}
+
+@keyframes green-button {
+    0%  {
+        background-color: rgb(36, 230, 110);
+        color: white;
+    }
+    100% {
+        border-color: rgb(36, 230, 110);
+        background-color: rgb(38, 196, 98);
+        color: white;
+    }
+}
+
+.green {
+    background-color: rgb(36, 230, 110);
+    color: white;
+}
+
+.green:hover {
+    animation: green-button 0.5s forwards;
+}

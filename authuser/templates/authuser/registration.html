@@ -1,0 +1,20 @@
+{% extends 'authuser/layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/base.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="panel">
+        <form action="{% url 'authuser:registration' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="form-button" value="ثبت نام">
+        </form>
+        <p> قبلا حساب کاربری ساخته اید؟<a href="{% url 'authuser:login'}">ورود به حساب</a> </p>
+    </div>
+</div>
+{% endblock %}
+

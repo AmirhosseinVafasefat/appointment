@@ -1,0 +1,21 @@
+{% extends 'home/base_layout.html' %}
+
+{% block base_head %}
+<title dir="rtl">خانه</title>
+{% block head %}
+{% endblock %}
+{% endblock %}
+
+{% block base_body %}
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <a href="{% url 'home:index' %}">خانه</a>
+            <a href="{% url 'patient:index' %}">گرفتن نوبت</a>
+            <a href="{% url 'patient:booked_appointments' %}">نوبت‌های گرفته شده</a>
+        </div>
+    </div>
+</header>
+{% block body %}
+{% endblock %}
+{% endblock %}

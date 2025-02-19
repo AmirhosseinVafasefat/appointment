@@ -1,0 +1,45 @@
+{% extends 'doctor/layout.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/doctor.css' %}">
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="display-flex">
+        {% for day in days %}
+            <div class="day-box">
+                <div class="date">
+                    <p>{{ day|to_jalali:'%A - %y/%m/%d' }}</p>
+                </div>
+                <div class="display-flex">
+                    {% for appointment in appointments %}
+                        {% if appointment.date == day %}
+                            {% if appointment.is_available %}
+                            <div class="appointment">
+                                <p>{{ appointment.time }}</p>
+                                <p>خالی</p>
+                                <form action="{% url 'doctor:delete_appointment' appointment_id=appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input class="form-button" type="submit" value="حذف نوبت">
+                                </form>
+                            </div>
+                            {% else %}
+                            <div class="appointment">
+                                <p>{{ appointment.time }}</p>
+                                <p>{{ appointment.patient.name }} {{ appointment.patient.last_name }} | {{ appointment.patient.phone_number }}</p>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% empty %}
+                <p>نوبتی ایجاد نکرده اید.</p>
+            {% endfor %} 
+    </div>
+</div>
+{% endblock %}

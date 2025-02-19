@@ -1,0 +1,22 @@
+{% extends 'home/base_layout.html' %}
+
+{% block base_head %}
+<title dir="rtl">داشبورد</title>
+{% block head %}
+{% endblock %}
+{% endblock %}
+
+{% block base_body %}
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <a href="{% url 'home:index' %}">خانه</a>
+            <a href="{% url 'doctor:index' %}">نوبت‌ها</a>
+            <a href="{% url 'doctor:create_office' %}">ایجاد/تغییر مطب</a>
+            <a href="{% url 'doctor:add_appointments' %}">ایجاد نوبت جدید</a>
+        </div>
+    </div>
+</header>
+{% block body %}
+{% endblock %}
+{% endblock %}

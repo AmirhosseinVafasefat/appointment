@@ -1,0 +1,60 @@
+.container {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(238, 237, 237);
+}
+
+.panel {
+    border: solid 0.1rem rgb(238, 237, 237);
+    border-radius: 1rem;
+    background-color: white;
+    padding: 2rem;
+}
+
+input, textarea, select { font-family:inherit; }
+
+.form-control{
+  direction: rtl;
+}
+
+.form-control:focus{
+  direction: ltr;
+}
+
+.form-control,
+.form-button {
+    font-size: 1rem;
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    justify-self: center;
+    border: solid 0.1rem lightgray;
+    border-radius: 0.5rem;
+    padding: 0.2rem;
+    
+}
+.form-control {
+    width: calc(100% - 0.5rem);
+}
+
+
+@keyframes select-button {
+    0%  {
+        background-color: lightgray;
+    }
+    100% {
+        border-color: lightgray;
+        background-color: rgb(195, 194, 194);
+    }
+}
+
+.form-button {
+    height: calc(2rem + 2px);
+    background-color: lightgray;
+    width: 100%;
+}
+
+.form-button:hover {
+    animation: select-button 0.5s forwards;
+}

@@ -1,0 +1,21 @@
+{% extends 'authuser/layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/base.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="panel">
+    <p>آیا از اینکه می‌خواهید از حساب کاربری خود خارج شوید اطمینان دارید؟</p>
+    <form action="{% url 'authuser:logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" class="form-button" value="خروج">
+    </form>
+    </div>
+</div>
+{% endblock %}
+
+
+

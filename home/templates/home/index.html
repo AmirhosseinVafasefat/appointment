@@ -1,0 +1,23 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/index.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a href="{% url 'patient:index' %}">
+        <div class="box green">
+            <p>
+                ورود به عنوان بیمار
+            </p>
+        </div>
+    </a>
+    <a href="{% url 'doctor:index' %}">
+        <div class="box blue">
+            ورود به عنوان متخصص
+        </div>
+    </a>
+</div>
+{% endblock %}
