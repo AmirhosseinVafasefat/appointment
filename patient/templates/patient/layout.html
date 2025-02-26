@@ -1,7 +1,7 @@
 {% extends 'home/base_layout.html' %}
 
 {% block base_head %}
-<title dir="rtl">خانه</title>
+<title dir="rtl">داشبورد بیمار</title>
 {% block head %}
 {% endblock %}
 {% endblock %}
@@ -13,6 +13,8 @@
             <a href="{% url 'home:index' %}">خانه</a>
             <a href="{% url 'patient:index' %}">گرفتن نوبت</a>
             <a href="{% url 'patient:booked_appointments' %}">نوبت‌های گرفته شده</a>
+            <a href="{% url 'patient:notifications' %}"><div class="notification"><p>پیام‌ها</p><div class="notification-icon">{{ num_unread_notifications }}</div></div>
+            </a>
         </div>
     </div>
 </header>

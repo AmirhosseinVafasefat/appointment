@@ -7,7 +7,7 @@ class City(models.Model):
     province = models.CharField(max_length=30, blank=False)
 
     def __str__(self):
-        return self.name + " || " + self.province    
+        return self.name  
 
 class Speciality(models.Model):
     name = models.CharField(max_length=60)
@@ -25,7 +25,7 @@ class Office(models.Model):
     telephone_number = models.CharField(max_length=11, blank=False)
 
     def __str__(self):
-        return self.user.name + " " + self.user.last_name + " || " + Speciality.__str__(self.speciality) + " in " + City.__str__(self.city)
+        return self.user.name + " " + self.user.last_name + " || " + Speciality.__str__(self.speciality) + " در " + City.__str__(self.city)
 
 class Appointment(models.Model):
     patient = models.ForeignKey(User, null=True, blank=True, related_name='appointments', on_delete=models.DO_NOTHING)
@@ -36,3 +36,11 @@ class Appointment(models.Model):
 
     def __str__(self):
         return Office.__str__(self.office) + " " + str(self.date) + " " + str(self.is_available)
+
+class Notification(models.Model):
+    message = models.CharField(max_length=100, blank=False)
+    sender = models.ForeignKey(User, blank=False, related_name='sent_notifications', on_delete=models.DO_NOTHING)
+    recipient = models.ForeignKey(User, blank=False, related_name='received_cancelations', on_delete=models.DO_NOTHING)
+    date = models.DateField(blank=False)
+    time = models.TimeField(blank=False)
+    unread = models.BooleanField(default=True)

@@ -15,11 +15,11 @@
 
 input, textarea, select { font-family:inherit; }
 
-.form-control{
+.latin{
   direction: rtl;
 }
 
-.form-control:focus{
+.latin:focus{
   direction: ltr;
 }
 

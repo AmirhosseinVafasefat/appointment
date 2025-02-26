@@ -1,19 +1,22 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.http.response import HttpResponseForbidden
 from django.urls import reverse
-from jdatetime import datetime
 import datetime as dt
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-from .models import City, Speciality, Office, Appointment
+from .decorators import specialist_check
+from .models import City, Speciality, Office, Appointment, Notification
 from .forms import CreateOffice, AddAppointmentForm
 
 # Create your views here.
 @login_required(login_url='/authuser/login')
+@specialist_check
 def index(request):
     user = request.user
+    office = user.office.get()
     #TODO write clean and optimized code 
     try:
-        appointments = user.office.get().appointments.all()
+        appointments = Appointment.objects.filter(office=office).order_by('date', 'time')
         days = set()
         for appointment in appointments:
             days.add(appointment.date)
@@ -26,6 +29,7 @@ def index(request):
     })
 
 @login_required(login_url='/authuser/login')
+@specialist_check
 def create_office(request):
     form = CreateOffice()
     user = request.user
@@ -45,6 +49,7 @@ def create_office(request):
     })
 
 @login_required(login_url='/authuser/login')
+@specialist_check
 def edit_office(request):
     user = request.user
     if not Office.objects.filter(user=user).exists():
@@ -64,6 +69,7 @@ def edit_office(request):
     })
 
 @login_required(login_url='/authuser/login')
+@specialist_check
 def add_appointments(request):
     user = request.user
     message = str()
@@ -112,7 +118,8 @@ def add_appointments(request):
         'form':form
     })
 
-@login_required(login_url='/authuser/login')     
+@login_required(login_url='/authuser/login')
+@specialist_check   
 def delete_appointment(request, appointment_id):
     if request.method == "POST":
         user = request.user
@@ -120,4 +127,25 @@ def delete_appointment(request, appointment_id):
         appointment = Appointment.objects.filter(pk=appointment_id).get()
         if appointment.office == office:
             appointment.delete()
+        return HttpResponseRedirect(reverse('doctor:index'))
+
+@login_required(login_url='/authuser/login')
+@specialist_check
+def cancel_appointment(request, appointment_id):
+    if request.method == "POST":
+        user = request.user
+        office = user.office.get()
+        appointment = Appointment.objects.filter(pk=appointment_id).get()
+        patient = appointment.patient
+
+        if appointment.office == office:
+            message = f"نوبت {appointment.date} {appointment.time}، مطب {appointment.office} از سوی متخصص لغو شد."
+            time = dt.datetime.now().time()
+            date = dt.datetime.now().date()
+            cancelation =  Notification(message=message, sender=user, recipient=patient, date=date, time=time)
+            cancelation.save()
+            appointment.patient = None
+            appointment.is_available = True
+            appointment.save()
+
         return HttpResponseRedirect(reverse('doctor:index'))

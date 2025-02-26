@@ -1,0 +1,25 @@
+{% extends 'patient/layout.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'home/doctor.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="display-flex">
+        {% for notification in notifications %}
+        <div class="day-box">
+            <div class="date">
+                <p>{{ notification.date |to_jalali:'%A - %y/%m/%d' }}</p>
+                <p>{{notification.time}}</p>
+            </div>
+            <p>{{ notification.message }}</p>
+        </div>
+        {% empty %}
+        <p>پیامی برای نمایش وجود ندارد.</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

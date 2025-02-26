@@ -6,7 +6,7 @@
     height: 5rem;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -31,9 +31,10 @@ p {
 }
 
 .day-box {
+    width: 20rem;
     padding: 0.25rem;
     border: solid 0.1rem black;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     margin: 0.25rem;
 }
 
@@ -59,4 +60,26 @@ input, textarea, select { font-family:inherit; }
     border: solid 0.1rem lightgray;
     border-radius: 0.5rem;
     padding: 0.2rem;
+}
+
+.box {
+    padding: 0.25rem;
+    border: solid 0.1rem rgb(156, 156, 156);
+    border-radius: 0.75rem;
+    margin: 0.25rem; 
+}
+
+.notification {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.notification-icon {
+    display: flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: red;
+    color: white;
+    border-radius: 0.75rem;
 }

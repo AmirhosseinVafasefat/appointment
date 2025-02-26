@@ -17,11 +17,13 @@
                 </div>
                 {% for appointment in appointments %}
                 {% if appointment.date == day %}
-                <form action="{% url 'patient:book_appointment' appointment_id=appointment.id %}" method="post">
+                <form class="box" action="{% url 'patient:book_appointment' appointment_id=appointment.id %}" method="post">
                     {% csrf_token %}
                     <p>{{appointment.time}}</p>
                     {% if appointment.is_available %}
                     <input class="form-button" type="submit" value="رزرو">
+                    {% else %}
+                    <p>نوبت پر است.</p>
                     {% endif %}
                 </form>
                 {% endif %}

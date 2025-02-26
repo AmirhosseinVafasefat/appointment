@@ -16,7 +16,8 @@
                     {% csrf_token %}
                     <p>{{ appointment.office.doctor }}</p>
                     <p>{{ appointment.date|to_jalali:'%A - %y/%m/%d' }}</p>
-                    <p>{{ appointment.office.city }}|{{ appointment.office.address }}</p>
+                    <p>{{ appointment.office.city }}</p>
+                    <p>{{ appointment.office.address }}</p>
                     <input class="form-button" type="submit" value="لغو رزرو">
                 </form>
             </div>

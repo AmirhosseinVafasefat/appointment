@@ -6,12 +6,12 @@ from django.core.validators import RegexValidator
 
 class RegistrationForm(UserCreationForm):
     phone_number = forms.RegexField(
-        label='', max_length=30, regex=r"^09[0-9]{9}$",
+        label='', max_length=11, regex=r"^09[0-9]{9}$",
         help_text="",
         error_messages={'invalid': "شماره تلفن خود را به درستی وارد کنید. مثلا 09011111111",
                         'unique': "این شماره تلفن قبلا وارد شده است.",
                         },
-        widget=forms.TextInput(attrs={'class': 'form-control',
+        widget=forms.TextInput(attrs={'class': 'form-control latin',
                                     'required': 'true',
                                     'placeholder': 'شماره تلفن'
         })
@@ -22,7 +22,7 @@ class RegistrationForm(UserCreationForm):
             required=True,
             strip=False,
             widget=forms.PasswordInput(attrs={"autocomplete": "new-password",
-                                    'class': 'form-control',
+                                    'class': 'form-control latin',
                                     'required': 'true',
                                     'placeholder': 'رمز'}),
             help_text="",
@@ -31,7 +31,7 @@ class RegistrationForm(UserCreationForm):
             label="",
             required=True,
             widget=forms.PasswordInput(attrs={"autocomplete": "new-password",
-                                    'class': 'form-control',
+                                    'class': 'form-control latin',
                                     'required': 'true',
                                     'placeholder': 'تکرار رمز'}),
             strip=False,
@@ -41,7 +41,7 @@ class RegistrationForm(UserCreationForm):
     name = forms.CharField(
          label="",
          required=True,
-         widget=forms.PasswordInput(attrs={'class': 'form-control',
+         widget=forms.TextInput(attrs={'class': 'form-control',
                                     'required': 'true',
                                     'placeholder': 'نام'}),
     )
@@ -49,7 +49,7 @@ class RegistrationForm(UserCreationForm):
     last_name = forms.CharField(
          label="",
          required=True,
-         widget=forms.PasswordInput(attrs={'class': 'form-control',
+         widget=forms.TextInput(attrs={'class': 'form-control',
                                     'required': 'true',
                                     'placeholder': 'نام خانوادگی'}),
     )
@@ -63,7 +63,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
             model = User
-            fields = ['name', 'last_name', 'phone_number', 'password1', 'password2']
+            fields = ['phone_number', 'name', 'last_name', 'password1', 'password2']
 
 class LoginForm(forms.Form):
     phone_number = forms.CharField(max_length=11,

@@ -31,6 +31,10 @@
                             <div class="appointment">
                                 <p>{{ appointment.time }}</p>
                                 <p>{{ appointment.patient.name }} {{ appointment.patient.last_name }} | {{ appointment.patient.phone_number }}</p>
+                                <form action="{% url 'doctor:cancel_appointment' appointment_id=appointment.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input class="form-button" type="submit" value="لغو نوبت">
+                                </form>                            
                             </div>
                             {% endif %}
                         {% endif %}

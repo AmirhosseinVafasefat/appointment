@@ -8,12 +8,14 @@
 
 {% block body %}
 <div class="container">
-    <div class="panel">
-    <form action="{% url 'doctor:edit_office' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" class="form-button" value="تکمیل اطلاعات">
-    </form>
-</div>
+    <div class="display-flex">
+        <div class="day-box">
+            <form action="{% url 'doctor:edit_office' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="form-button" value="تکمیل اطلاعات">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

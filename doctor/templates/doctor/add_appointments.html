@@ -9,15 +9,17 @@
 
 {% block body %}
 <div class="container">
-    <div class="panel">
+    <div class="display-flex">
         {% if message %}
         <div>{{message}}</div>
         {% endif %}
-        <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" class="form-button" value="ایجاد نوبت">
-        </form>
-        {{ form.media }}
+        <div class="day-box">
+            <form method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="form-button" value="ایجاد نوبت">
+            </form>
+            {{ form.media }}
+        </div>
     </div>
 </div>
 {% endblock %}
